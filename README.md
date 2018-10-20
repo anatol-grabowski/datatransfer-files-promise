@@ -1,5 +1,6 @@
 # datatransfer-files-promise
-Get a promise for a flat array of files from the 'drop' event. Directories are traversed recursively.
+Get a promise for a flat array of files from the 'drop' event, like `<input type="file"/>.files`. Directories are traversed recursively.
+
 
 ## Usage:
 ```
