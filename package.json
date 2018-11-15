@@ -3,7 +3,7 @@
   "version": "1.1.1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "http-server"
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +23,8 @@
     "propmise",
     "input type=\"file\"",
     "dataTransfer.items"
-  ]
+  ],
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
 }

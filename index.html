@@ -1,0 +1,18 @@
+<html>
+  <body>
+    <div class='dropzone' style='width: 500px; height: 500px; border: solid black 2px'></div>
+    <script src='index.js'></script>
+    <script>
+      const dropzone = document.querySelector('.dropzone')
+      dropzone.addEventListener('dragover', evt => evt.preventDefault())
+      dropzone.addEventListener('drop', async evt => {
+        evt.preventDefault()
+        const files = await window.getFilesFromDataTransferItems(evt.dataTransfer.items)
+        console.log('files', files)
+        files.forEach((file, i) => {
+          console.log(i, file.filepath)
+        })
+      })
+    </script>
+  </body>
+</html>
