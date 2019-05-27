@@ -46,12 +46,19 @@ async function getFilesFromDataTransferItems(dataTransferItems, options={raw: fa
   }
 
   let files = []
-  let entriesPromises = []
-  for (let item of dataTransferItems) {
-    const entry = item.webkitGetAsEntry()
+  let entries = []
+
+  // Pull out all entries before reading them
+  for (let i = 0, ii = dataTransferItems.length; i < ii; i++) {
+    entries.push(dataTransferItems[i].webkitGetAsEntry());
+  }
+
+  // Recursively read through all entries
+  for (let entry of entries) {
     const newFiles = await getFilesFromEntry(entry)
     files = files.concat(newFiles)
   }
+
   return files
 }
 
