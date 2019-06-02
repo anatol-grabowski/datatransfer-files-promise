@@ -21,7 +21,7 @@ Get a promise for a flat array of files from the 'drop' event, like `<input type
       dropArea.addEventListener('drop', event => {
         event.preventDefault()
         const items = event.dataTransfer.items
-        getFilesFromDataTransferItems(items)
+        window.getFilesFromDataTransferItems(items)
           .then(files => {
             console.log(files[0].filepath)
           })
@@ -39,7 +39,7 @@ const dropzone = document.querySelector('.drop-area')
 dropzone.addEventListener('dragover', evt => evt.preventDefault())
 dropzone.addEventListener('drop', async evt => {
   evt.preventDefault()
-  const files = await window.getFilesFromDataTransferItems(evt.dataTransfer.items)
+  const files = await getFilesFromDataTransferItems(evt.dataTransfer.items)
   console.log('files', files)
   files.forEach((file, i) => {
     console.log(i, file.filepath)
