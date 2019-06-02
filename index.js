@@ -62,5 +62,5 @@ async function getFilesFromDataTransferItems (dataTransferItems, options = { raw
   return files
 }
 
-if (this === window) var exports = window
-exports.getFilesFromDataTransferItems = getFilesFromDataTransferItems
+if (this.window && this === this.window) this.getFilesFromDataTransferItems = getFilesFromDataTransferItems
+else module.exports.getFilesFromDataTransferItems = getFilesFromDataTransferItems
