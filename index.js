@@ -1,8 +1,8 @@
-async function getFilesFromDataTransferItems(dataTransferItems, options={raw: false}) {
-  const readFile = (entry, path='') => {
+async function getFilesFromDataTransferItems (dataTransferItems, options = { raw: false }) {
+  const readFile = (entry, path = '') => {
     return new Promise((resolve, reject) => {
       entry.file(file => {
-        if (!options.raw) file.filepath = path + file.name //save full path
+        if (!options.raw) file.filepath = path + file.name // save full path
         resolve(file)
       }, reject)
     })
@@ -33,7 +33,7 @@ async function getFilesFromDataTransferItems(dataTransferItems, options={raw: fa
     return files
   }
 
-  const getFilesFromEntry = async (entry, path='') => {
+  const getFilesFromEntry = async (entry, path = '') => {
     if (entry.isFile) {
       const file = await readFile(entry, path)
       return [file]
@@ -46,12 +46,19 @@ async function getFilesFromDataTransferItems(dataTransferItems, options={raw: fa
   }
 
   let files = []
-  let entriesPromises = []
-  for (let item of dataTransferItems) {
-    const entry = item.webkitGetAsEntry()
+  let entries = []
+
+  // Pull out all entries before reading them
+  for (let i = 0, ii = dataTransferItems.length; i < ii; i++) {
+    entries.push(dataTransferItems[i].webkitGetAsEntry())
+  }
+
+  // Recursively read through all entries
+  for (let entry of entries) {
     const newFiles = await getFilesFromEntry(entry)
     files = files.concat(newFiles)
   }
+
   return files
 }
 
