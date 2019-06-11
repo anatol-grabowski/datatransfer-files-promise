@@ -1,10 +1,23 @@
 async function getFilesFromDataTransferItems (dataTransferItems, options = { raw: false }) {
+  const checkErr = (err) => {
+    if (getFilesFromDataTransferItems.didShowInfo) return
+    if (err.name !== 'EncodingError') return
+    getFilesFromDataTransferItems.didShowInfo = true
+    const infoMsg = `${err.name} occured within datatransfer-files-promise module\n`
+      + `Error message: "${err.message}"\n`
+      + 'Try serving html over http if currently you are running it from the filesystem.'
+    console.warn(infoMsg)
+  }
+
   const readFile = (entry, path = '') => {
     return new Promise((resolve, reject) => {
       entry.file(file => {
         if (!options.raw) file.filepath = path + file.name // save full path
         resolve(file)
-      }, reject)
+      }, (err) => {
+        checkErr(err)
+        reject(err)
+      })
     })
   }
 
@@ -17,7 +30,10 @@ async function getFilesFromDataTransferItems (dataTransferItems, options = { raw
           files = files.concat(itemFiles)
         }
         resolve(files)
-      }, reject)
+      }, (err) => {
+        checkErr(err)
+        reject(err)
+      })
     })
   }
 
