@@ -30,7 +30,7 @@ Get a promise for a flat array of files from the 'drop' event, like `<input type
   </body>
 </html>
 ```
-[click here to see open this example in browser](./index.html)
+[click here to see open this example in browser](index.html)
 
 ### Example with require (through babel or similar tools) and async/await
 ```
