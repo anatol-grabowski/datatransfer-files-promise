@@ -30,7 +30,7 @@ Get a promise for a flat array of files from the 'drop' event, like `<input type
   </body>
 </html>
 ```
-[open this example in browser](https://htmlpreview.github.io/?https://github.com/grabantot/datatransfer-files-promise/blob/master/index.html)
+[open this example in browser](https://datatransfer-files-promise-occf8akg5.now.sh/)
 
 ### Example with require (through babel or similar tools) and async/await
 ```
