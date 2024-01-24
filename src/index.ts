@@ -1,8 +1,10 @@
-async function getFilesFromDataTransferItems (dataTransferItems, options = { raw: false }) {
+let didShowInfo = false
+
+export async function getFilesFromDataTransferItems (dataTransferItems: DataTransferItemList, options = { raw: false }): Promise<File[]> {
   const checkErr = (err) => {
-    if (getFilesFromDataTransferItems.didShowInfo) return
+    if (didShowInfo) return
     if (err.name !== 'EncodingError') return
-    getFilesFromDataTransferItems.didShowInfo = true
+    didShowInfo = true
     const infoMsg = `${err.name} occured within datatransfer-files-promise module\n`
       + `Error message: "${err.message}"\n`
       + 'Try serving html over http if currently you are running it from the filesystem.'
@@ -66,7 +68,8 @@ async function getFilesFromDataTransferItems (dataTransferItems, options = { raw
 
   // Pull out all entries before reading them
   for (let i = 0, ii = dataTransferItems.length; i < ii; i++) {
-    entries.push(dataTransferItems[i].webkitGetAsEntry())
+    const newEntry = dataTransferItems[i].webkitGetAsEntry()
+    entries.push(newEntry)
   }
 
   // Recursively read through all entries
@@ -77,6 +80,3 @@ async function getFilesFromDataTransferItems (dataTransferItems, options = { raw
 
   return files
 }
-
-if (this.window && this === this.window) this.getFilesFromDataTransferItems = getFilesFromDataTransferItems
-else module.exports.getFilesFromDataTransferItems = getFilesFromDataTransferItems

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "module": "commonjs",
+    "allowJs": true,
+    "noImplicitAny": false,
+    "incremental": false,
+    "strict": true,
+    "listEmittedFiles": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "strictNullChecks": false,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "paths": {}
+  },
+  "include": [
+    "src"
+  ]
+}

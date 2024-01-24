@@ -1,0 +1,2 @@
+# empty file to unignore dist/ from npm publish
+# if this file doesn't exist .gitignore is used instead
